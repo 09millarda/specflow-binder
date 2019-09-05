@@ -24,9 +24,15 @@ export default class NavigationHandler {
       return;
     }
 
-    const editor = await vscode.window.showTextDocument(document, 1, false);
     const position = new vscode.Position(binding.lineNumber, binding.columnNumber);
-    editor.selection = new vscode.Selection(position, position);
+    const selection = new vscode.Selection(position, position);
+
+    const editor = await vscode.window.showTextDocument(document, {
+      selection: selection,
+      viewColumn: 1,
+      preserveFocus: false
+    });
+    
     editor.revealRange(new vscode.Range(position, position), vscode.TextEditorRevealType.InCenter);
   }
 
