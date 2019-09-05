@@ -1,7 +1,7 @@
 import { IBinding, BindingType } from ".";
 import * as vscode from "vscode";
 import Logger from "./Logger";
-import { getFileExtension, getCurrentStep } from "./helpers";
+import { getFileExtension, getCurrentStep, findBinding } from "./helpers";
 
 export default class NavigationHandler {
   private static getActiveEditor(): vscode.TextEditor | undefined {
@@ -37,14 +37,14 @@ export default class NavigationHandler {
       return;
     }
     
-    const step = getCurrentStep(this.getActiveEditor()!, document);
+    const step = getCurrentStep(this.getActiveEditor()!.selection.active.line, document);
     if (step === undefined) {
       return;
     }
 
     Logger.logDebug("Attempting to step into binding with type {BindingType} and step '{BindingStep}'", step.type, step.step);
 
-    const binding = bindings.find(b => b.type === step.type && new RegExp(b.step).exec(step.step) !== null);
+    const binding = findBinding(bindings, step);
     if (binding === undefined) {
       Logger.logError("Cannot find binding with verb '{Verb}' and step '{Step}'. Try refreshing your bindings (Refresh Bindings)", step.type, step.step);
       return;

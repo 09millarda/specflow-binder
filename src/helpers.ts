@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { IStep, BindingType } from ".";
+import { IStep, BindingType, IBinding } from ".";
 
 export function getFileExtension(filePath: vscode.Uri): string | undefined {
   const splitFilePath = filePath.fsPath.split(".");
@@ -37,11 +37,10 @@ export function getStep(line: string): string {
   return splitLine.join(" ");
 }
 
-export function getCurrentStep(editor: vscode.TextEditor, document: vscode.TextDocument): IStep | undefined {
-  const lineNumber = editor.selection.active.line;
+export function getCurrentStep(lineNumber: number, document: vscode.TextDocument): IStep | undefined {
   const line = getLine(document, lineNumber);
 
-  const bindingType = resolveBindingType(editor, document);
+  const bindingType = resolveBindingType(lineNumber, document);
   if (bindingType === undefined) { return undefined; }
 
   return {
@@ -59,15 +58,34 @@ function keepLooping(bindingType: BindingType | undefined, lineNumber: number, i
   return false;
 }
 
-function resolveBindingType(editor: vscode.TextEditor, document: vscode.TextDocument) {
-  let lineNumber = editor.selection.active.line;
+function resolveBindingType(lineNumber: number, document: vscode.TextDocument) {
+  let currLine = lineNumber;
   let bindingType: BindingType | undefined;
   let isABinding = false;
 
-  while (keepLooping(bindingType = convertToBindingType(getLine(document, lineNumber)), lineNumber, isABinding)) {
+  while (keepLooping(bindingType = convertToBindingType(getLine(document, currLine)), currLine, isABinding)) {
     isABinding = true;
-    lineNumber--;
+    currLine--;
   }
 
   return bindingType;
+}
+
+export function getActiveEditor(): vscode.TextEditor | undefined {
+  return vscode.window.activeTextEditor;
+}
+
+export function findBinding(bindings: IBinding[], step: IStep): IBinding | undefined {
+  const binding = bindings.find(b => b.type === step.type && new RegExp(b.step).exec(step.step) !== null);
+
+  return binding;
+}
+
+export function resetStyling() {
+  const editor = getActiveEditor();
+  if (editor === undefined) { return; }
+
+  const range = new vscode.Range(new vscode.Position(15, 0), new vscode.Position(15, 6));
+  const decoration = vscode.window.createTextEditorDecorationType({});
+  editor.setDecorations(decoration, [range]);
 }
