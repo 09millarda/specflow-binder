@@ -2,9 +2,14 @@
 	"name": "specflow-binder",
 	"displayName": "specflow binder",
 	"description": "Gherkin Binder for Specflow (C#_",
-	"version": "0.0.1",
+	"version": "1.2.0",
 	"engines": {
 		"vscode": "^1.37.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/09millarda/specflow-binder",
+		"directory": ""
 	},
 	"publisher": "amillard98",
 	"categories": [

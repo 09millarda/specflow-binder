@@ -76,7 +76,7 @@ export function getActiveEditor(): vscode.TextEditor | undefined {
 }
 
 export function findBinding(bindings: IBinding[], step: IStep): IBinding | undefined {
-  const binding = bindings.find(b => b.type === step.type && new RegExp(b.step).exec(step.step) !== null);
+  const binding = bindings.find(b => b.type === step.type && new RegExp(`^${b.step}$`).exec(step.step) !== null);
 
   return binding;
 }
@@ -88,4 +88,12 @@ export function resetStyling() {
   const range = new vscode.Range(new vscode.Position(15, 0), new vscode.Position(15, 6));
   const decoration = vscode.window.createTextEditorDecorationType({});
   editor.setDecorations(decoration, [range]);
+}
+
+export function getLastCharacter(line: string): string | undefined {
+  line.trim();
+
+  if (line.length === 0) { return undefined; }
+
+  return line[line.length - 1];
 }

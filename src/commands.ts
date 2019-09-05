@@ -12,6 +12,7 @@ async function discoverBindings(specflowBindingsHandler: SpecflowBindingsHandler
 }
 
 async function goToStep(specflowBindingsHandler: SpecflowBindingsHandler) {
+  vscode.commands.executeCommand("editor.action.revealDefinition");
   const bindings = await specflowBindingsHandler.getBindings();
   await NavigationHandler.goToStep(bindings);
 }
