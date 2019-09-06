@@ -24,7 +24,8 @@ export default class SpecflowBindingsHandler {
   public async discoverBindings() {
     this.resetBindings();
 
-    const testFileUris = await vscode.workspace.findFiles("**/tests/**/*.cs", "**/*.feature");
+    const searchGlob = vscode.workspace.getConfiguration().get<string>('specflowtools.stepfilesearchglob');
+    const testFileUris = await vscode.workspace.findFiles(searchGlob || '**/*.cs', '**/*.feature.cs');
     const testFiles = testFileUris.map(testFileUri => new TestFile(testFileUri));
 
     Logger.logInformation("Discovering Specflow Bindings from {TestFileCount} test files", testFiles.length);

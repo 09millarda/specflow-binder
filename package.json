@@ -25,7 +25,7 @@
 		"Linters"
 	],
 	"activationEvents": [
-		"*"
+		"onLanguage:feature"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -48,7 +48,19 @@
 			"extensions": [
 				".feature"
 			]
-		}]
+		}],
+		"configuration":[
+			{
+				"title": "Specflow Tools",
+				"properties": {
+					"specflowtools.stepfilesearchglob": {
+						"type": "string",
+						"default": "**/*.cs",
+						"description": "Glob for what C# files to search for the step bindings in"
+					}
+				}
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
