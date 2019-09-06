@@ -1,8 +1,8 @@
 {
-	"name": "specflow-binder",
-	"displayName": "specflow binder",
-	"description": "Gherkin Binder for Specflow (C#_",
-	"version": "1.2.0",
+	"name": "specflow-tools",
+	"displayName": "Specflow Tools",
+	"description": "A set of Specflow Tools for VS Code",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.37.0"
 	},
@@ -23,15 +23,23 @@
 		"commands": [
 			{
 				"command": "extension.specbind.discoverBindings",
-				"title": "Spec-Bind: Refresh Bindings"
+				"title": "Specflow: Refresh Bindings"
 			}
 		],
 		"keybindings": [
 			{
+				"command": "extension.specbind.goToStep",
 				"key": "F12",
-				"command": "extension.specbind.goToStep"
+				"when": "editorTextFocus && editorLangId == 'feature'"
 			}
-		]
+		],
+		"languages": [{
+			"id": "feature",
+			"aliases": ["feature", "feature"],
+			"extensions": [
+				".feature"
+			]
+		}]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
