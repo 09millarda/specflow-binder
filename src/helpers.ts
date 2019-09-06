@@ -71,6 +71,13 @@ function resolveBindingType(lineNumber: number, document: vscode.TextDocument) {
   return bindingType;
 }
 
+export function getActiveDocument(): vscode.TextDocument | undefined{
+  const editor = getActiveEditor();
+  if (editor !== undefined){
+    return editor.document;
+  }
+}
+
 export function getActiveEditor(): vscode.TextEditor | undefined {
   return vscode.window.activeTextEditor;
 }
