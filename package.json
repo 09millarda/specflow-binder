@@ -2,6 +2,14 @@
 	"name": "specflow-tools",
 	"displayName": "Specflow Tools",
 	"description": "A set of Specflow Tools for VS Code",
+	"keywords": [
+		"Gherkin",
+		"Specflow",
+		"C#",
+		"Bindings",
+		"Table Formatting"
+	],
+	"icon": "logo.jpeg",
 	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.37.0"
@@ -13,7 +21,8 @@
 	},
 	"publisher": "amillard98",
 	"categories": [
-		"Other"
+		"Snippets",
+		"Linters"
 	],
 	"activationEvents": [
 		"*"
