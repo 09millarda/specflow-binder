@@ -1,9 +1,16 @@
 import { IBinding } from ".";
 import * as vscode from "vscode";
-import { getCurrentStep, getFileExtension, getActiveEditor, findBinding, resetStyling, getLastCharacter } from "./helpers";
+import { getCurrentStep, getFileExtension, getActiveEditor, findBinding, resetStyling, getLastCharacter, getActiveDocument } from "./helpers";
 import { RedTextStyle } from "./styles";
 
 export default class FeatureHandler {
+  static validateActiveDocument(bindings: IBinding[]) {
+    const doc = getActiveDocument();
+    if (doc !== undefined){
+      FeatureHandler.validateSteps(doc, bindings);
+    }
+  }
+  
   public static async validateSteps(doc: vscode.TextDocument, bindings: IBinding[]) {
     if (getFileExtension(doc.uri) !== "feature") { return; }
     RedTextStyle.dispose();
