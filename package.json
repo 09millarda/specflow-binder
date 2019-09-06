@@ -25,7 +25,7 @@
 		"Linters"
 	],
 	"activationEvents": [
-		"*"
+		"onLanguage:feature"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -54,6 +54,18 @@
 				"language": "feature",
 				"scopeName": "text.gherkin.feature",
 				"path": "./src/syntaxes/feature.tmLanguage"
+			}
+		],
+		"configuration":[
+			{
+				"title": "Specflow Tools",
+				"properties": {
+					"specflowtools.stepfilesearchglob": {
+						"type": "string",
+						"default": "**/*.cs",
+						"description": "Glob for what C# files to search for the step bindings in"
+					}
+				}
 			}
 		]
 	},

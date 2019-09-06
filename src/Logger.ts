@@ -51,7 +51,7 @@ export default class Logger {
   public static logInformation(message: string, ...args: LoggerArgs[]) {
     const log = this.resolveLogMessage(message, ...args);
 
-    vscode.window.showInformationMessage(log.messageFilled);
+    // vscode.window.showInformationMessage(log.messageFilled);
     console.log(log.messageFilled, log.args);
   }
 

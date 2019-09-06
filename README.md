@@ -17,6 +17,10 @@ I recommend you use this extension with the [Gherkin step autocomplete](https://
 3. **Error Highlighting**
 ![Specflow Tools - Error Highlighting](https://i.ibb.co/6vCLSRN/error-highlighting.gif)
 
+## Configuration
+
+_specflowtools.stepfilesearchglob_ - The file search glob to locate .CS files with specflow step bindings
+
 ## Planned Features
 
  - Step snippets (auto-complete)
