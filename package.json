@@ -48,7 +48,14 @@
 			"extensions": [
 				".feature"
 			]
-		}]
+		}],
+		"grammars": [
+			{
+				"language": "feature",
+				"scopeName": "text.gherkin.feature",
+				"path": "./src/syntaxes/feature.tmLanguage"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

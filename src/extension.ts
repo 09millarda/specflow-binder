@@ -9,6 +9,12 @@ const specflowBindingsHandler = new SpecflowBindingsHandler();
 export function activate(context: vscode.ExtensionContext) {
 	Logger.logDebug("Activated the SpecBind extension");
 
+	vscode.languages.setLanguageConfiguration("feature", {
+		comments: {
+			lineComment: "#"
+		}
+	});
+
 	registerCommands(context, specflowBindingsHandler);
 	registerListeners(specflowBindingsHandler);
 
