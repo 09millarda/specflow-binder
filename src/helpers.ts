@@ -27,7 +27,7 @@ export function convertToBindingType(line: string): BindingType | undefined {
 }
 
 export function getLine(document: vscode.TextDocument, lineNumber: number): string {
-  return document.lineAt(lineNumber).text;
+  return document.lineAt(lineNumber).text.trim();
 }
 
 export function getStep(line: string): string {
